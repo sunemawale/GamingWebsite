@@ -145,4 +145,4 @@ LOGIN_URL = '/login/'
 
 ESEWA_URL = "https://rc-epay.esewa.com.np/api/epay/main/v2/form"
 KHALTI_TEST_PUBLIC_KEY = "test_public_key_xxxxxxxxx"
-KHALTI_TEST_SECRET_KEY = "test_secret_key_xxxxxxxxx"
+KHALTI_TEST_SECRET_KEY = ""
