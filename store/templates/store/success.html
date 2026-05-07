@@ -1,0 +1,12 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Order Success{% endblock %}
+
+{% block content %}
+    <main>
+        <h2>Thank you, {{ order.name }}!</h2>
+        <p>Your order #{{ order.id }} has been placed successfully.</p>
+        <p>Total Amount: Rs {{ order.total_amount }}</p>
+        <a href="/"><button>Go Back to Home</button></a>
+    </main>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<main>
+    {% load static %}
+
+    <section class="hero">
+        <div class="hero-image">
+            <img src="{% static 'products/hero.jpg' %}" alt="Gaming Setup">
+        </div>
+        <div class="hero-text">
+            <h1>Level Up Your Gaming </h1>
+            <p>Best gaming gear at unbeatable prices</p>
+            <a href="/myproduct/" class="hero-btn">Shop Now</a>
+        </div>
+
+
+    </section>
+</main>
+{% endblock %}

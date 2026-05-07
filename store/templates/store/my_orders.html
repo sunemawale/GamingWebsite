@@ -1,0 +1,109 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<h2>My Orders</h2>
+
+{% if orders %}
+    {% for order in orders %}
+        <div class="order-card" style="border:1px solid #ccc; padding:20px; margin-bottom:30px; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
+
+            <h3>Order ID: {{ order.id }}</h3>
+            <p><strong>Name:</strong> {{ order.name }}</p>
+            <p><strong>Address:</strong> {{ order.address }}</p>
+            <p><strong>Phone:</strong> {{ order.phone }}</p>
+            <p><strong>Total:</strong> Rs {{ order.total_amount }}</p>
+
+            <h4>Products:</h4>
+            <table border="1" cellpadding="10" style="width:100%; border-collapse: collapse;">
+                <tr style="background:#f2f2f2;">
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                </tr>
+
+                {% for item in order.orderitem_set.all %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>Rs {{ item.product.price }}</td>
+                    <td>Rs {{ item.product.price|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+
+            </table>
+
+            <br>
+
+            <!-- Payment Button -->
+            <button class="khalti-btn"
+                data-id="{{ order.id }}"
+                data-amount="{{ order.total_amount }}">
+                Pay with Khalti
+            </button>
+
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No orders yet.</p>
+{% endif %}
+
+<!-- Khalti Script (LOAD ONLY ONCE) -->
+<script src="https://khalti.com/static/khalti-checkout.js"></script>
+
+<script>
+document.querySelectorAll(".khalti-btn").forEach(button => {
+    button.addEventListener("click", function () {
+
+        let orderId = this.dataset.id;
+        let amount = this.dataset.amount;
+
+        startKhalti(orderId, amount);
+    });
+});
+function startKhalti(orderId, amount) {
+
+    var config = {
+        publicKey: "YOUR_PUBLIC_KEY",  // 🔴 replace this
+
+        productIdentity: "ORDER_" + orderId,
+        productName: "Gaming Order " + orderId,
+        productUrl: "http://127.0.0.1:8000/",
+
+        eventHandler: {
+
+            onSuccess(payload) {
+                console.log("PAYLOAD:", payload);
+
+                fetch("/khalti-verify/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    },
+                    body: JSON.stringify(payload)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    alert("Payment Successful!");
+                    location.reload();
+                });
+            },
+
+            onError(error) {
+                console.log(error);
+                alert("Payment Failed");
+            },
+
+            onClose() {
+                console.log("Widget Closed");
+            }
+        }
+    };
+
+    var checkout = new KhaltiCheckout(config);
+    checkout.show({ amount: amount * 100 }); // paisa conversion
+}
+</script>
+
+{% endblock %}

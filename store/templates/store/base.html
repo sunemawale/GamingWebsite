@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'store/css/style.css' %}?v={{ STATIC_VERSION }}">
+    <title>{% block title %}Game Equipment Store{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h2 class="logo">
+            <span class="gaming">Gaming</span><span>Zone</span>
+        </h2>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about/">About us</a>
+            <a href="/myproduct/">Our Products</a>
+            <a href="/cart/">Cart</a>
+            <a href="{% url 'my_orders' %}">My Orders</a>
+        </nav>
+
+        <div class="login">
+        {% if user.is_authenticated %}
+            <span>Hi, {{ user.username }}</span>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            
+        {% endif %}
+</div>
+    </header>
+    <script src="https://khalti.com/static/khalti-checkout.js"></script>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        <p>© 2026 Game Equipment Store | All Rights Reserved</p>
+    </footer>
+</body>
+
+</html>

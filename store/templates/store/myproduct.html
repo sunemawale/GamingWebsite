@@ -1,0 +1,24 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+    <main>
+        <div class="products">
+            {% for product in products %}
+            <div class="product-card">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                <h2>
+                    <a href="/product/{{ product.id }}/">
+                        {{ product.name }}
+                    </a>
+                </h2>
+                <p>Category: {{ product.category }}</p>
+                <p>Price: Rs {{ product.price }}</p>
+                <p>{{ product.description|truncatewords:20 }}</p>
+                <a href="/add-to-cart/{{ product.id }}/">
+                    <button>Add to Cart</button>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}

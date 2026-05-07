@@ -1,0 +1,75 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<section class="about-hero">
+    <div class="about-hero-text">
+        <h1>About Gaming Zone </h1>
+        <p>Your ultimate destination for high-quality gaming gear and accessories.</p>
+    </div>
+    <div class="about-hero-image">
+        <img src="{% static 'products/about.jpg' %}" alt="Gaming setup">
+    </div>
+</section>
+
+<section class="about-content">
+    <div class="about-section">
+        <img src="{% static 'products/valo.jpg' %}" alt="Team" class="about-img">
+        <div class="about-text">
+            <h2>Our <span>Mission</span></h2>
+            <p>We strive to provide gamers with the best equipment and support to level up their gaming experience.</p>
+        </div>
+    </div>
+
+    <section class="team-scroll-auto">
+    <h2>Some Games</h2>
+    <div class="scroll-container-auto">
+        <div class="scroll-track">
+            <!-- First set of items -->
+            <div class="scroll-item">
+                <img src="{% static 'products/slide1.jpg' %}" alt="Team 1">
+              
+            </div>
+            <div class="scroll-item">
+                <img src="{% static 'products/slide2.jpg' %}" alt="Team 2">
+            
+            </div>
+            <div class="scroll-item">
+                <img src="{% static 'products/slide3.jpg' %}" alt="Team 3">
+              
+            </div>
+            <div class="scroll-item">
+                <img src="{% static 'products/slide4.jpg' %}" alt="Team 4">
+             
+            </div>
+            <div class="scroll-item">
+                <img src="{% static 'products/slide5.jpg' %}" alt="Team 5">
+                
+            </div>
+            <!-- Duplicate of the first set for seamless infinite scroll -->
+            <div class="scroll-item" aria-hidden="true">
+                <img src="{% static 'products/slide6.jpg' %}" alt="Team 1">
+              
+            </div>
+            <div class="scroll-item" aria-hidden="true">
+                <img src="{% static 'products/slide2.jpg' %}" alt="Team 2">
+                
+            </div>
+            <div class="scroll-item" aria-hidden="true">
+                <img src="{% static 'products/slide3.jpg' %}" alt="Team 3">
+             
+            </div>
+            <div class="scroll-item" aria-hidden="true">
+                <img src="{% static 'products/slide4.jpg' %}" alt="Team 4">
+                
+            </div>
+            <div class="scroll-item" aria-hidden="true">
+                <img src="{% static 'products/slide5.jpg' %}" alt="Team 5">
+                
+            </div>
+        </div>
+    </div>
+    </section>
+</section>
+{% endblock %}

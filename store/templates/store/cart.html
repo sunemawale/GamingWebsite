@@ -1,0 +1,44 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+<div class="cart-container">
+
+{% if products %}
+    {% for product in products %}
+        <div class="cart-item">
+            <div class="cart-info">
+                <h2>{{ product.name }}</h2>
+                <p>Price: Rs {{ product.price }}</p>
+
+                <div class="quantity">
+                    <a href="/decrease/{{ product.id }}/" class="btn-small">➖</a>
+                    <span>{{ product.quantity }}</span>
+                    <a href="/increase/{{ product.id }}/" class="btn-small">➕</a>
+                </div>
+
+                <p>Total: Rs {{ product.total_price }}</p>
+            </div>
+
+            <div class="cart-action">
+                <a href="/remove/{{ product.id }}/">
+                    <button class="remove-btn">Remove</button>
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="cart-total">
+        <h2>Grand Total: Rs {{ total }}</h2>
+        <a href="/checkout/">
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </a>
+    </div>
+
+{% else %}
+    <p class="empty-cart">Your cart is empty 😢</p>
+{% endif %}
+
+</div>
+{% endblock %}
